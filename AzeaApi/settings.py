@@ -92,12 +92,9 @@ WSGI_APPLICATION = 'AzeaApi.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "u384729105_Azea",
-        "HOST": "sql452.main-hosting.eu",
-        "USER": "u384729105_Admin",
-        "PASSWORD": "Admin123",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
