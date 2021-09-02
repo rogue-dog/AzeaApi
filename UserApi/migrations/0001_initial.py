@@ -9,12 +9,13 @@ class Migration(migrations.Migration):
 
     dependencies = [
     ]
-
+# Asshole
     operations = [
         migrations.CreateModel(
             name='User',
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.BigAutoField(auto_created=True,
+                 primary_key=True, serialize=False, verbose_name='ID')),
                 ('username', models.CharField(max_length=250)),
                 ('email', models.CharField(max_length=250)),
                 ('name', models.CharField(max_length=250)),
@@ -24,7 +25,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='UserVerification',
             fields=[
-                ('email', models.CharField(max_length=250, primary_key=True, serialize=False)),
+                ('email', models.CharField(max_length=250,
+                 primary_key=True, serialize=False)),
                 ('otp', models.CharField(max_length=250)),
             ],
         ),
