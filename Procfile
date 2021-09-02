@@ -1,0 +1,1 @@
+web: AzeaApi.wsgi
