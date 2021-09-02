@@ -1,0 +1,20 @@
+from django.db import models
+
+# Create your models here.
+
+
+class User(models.Model):
+    username = models.CharField(max_length=250)
+    email = models.CharField(max_length=250)
+
+    name = models.CharField(max_length=250)
+
+    password = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.username
+
+
+class UserVerification (models.Model):
+    email = models.CharField(max_length=250, primary_key=True)
+    otp = models.CharField(max_length=250)
