@@ -1,2 +1,2 @@
-web: gunicorn AzeaApi.wsgi
 manage.py migrate
+web: gunicorn AzeaApi.wsgi
