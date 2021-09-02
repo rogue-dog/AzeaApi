@@ -5,7 +5,7 @@ import random
 
 
 def verify_email(email):
-    v = validate_email(email, verify=True)
+    v = validate_email(email)
     if(v):
         if(User.objects.filter(email=email).exists()):
             return "Old"

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import dj_database_url
 from pathlib import Path
 import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -91,15 +91,8 @@ WSGI_APPLICATION = 'AzeaApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "u384729105_Azea",
-        "HOST": "sql452.main-hosting.eu",
-        "USER": "u384729105_Admin",
-        "PASSWORD": "Admin123",
-    }
-}
+DATABASES = {'default': dj_database_url.parse(
+    'postgres://qufu;zpjhabinxc:95127f5da60e96448d726a3c74cfb3176991e7bc061ea0f1ec620ccc048ac60b@ec2-54-170-163-224.eu-west-1.compute.amazonaws.com:5432/dfb5psv68pkbi')}
 
 
 # Password validation
