@@ -24,7 +24,7 @@ def verify_email(email):
                 return "New"
 
             except:
-                return ("Error")
+                return "Error"
     return "Invalid Email"
 
 
