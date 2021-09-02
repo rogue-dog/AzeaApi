@@ -38,7 +38,7 @@ EMAIL_HOST_PASSWORD = "jLmCYpZvW9Qc62JU"
 SECRET_KEY = 'a<D>A<Dw1e!@#$@3fwv!+^q8s!0-6g-3pz-0!!dx&m@xgy*yjd2qtwt7-h#9n$ss7$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
