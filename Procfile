@@ -1,1 +1,1 @@
-web: AzeaApi.wsgi
+web: gunicorn AzeaApi.wsgi
