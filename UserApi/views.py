@@ -16,9 +16,16 @@ class checkEmailAndSendOTP(generics.ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         email = request.data.get("email")
-        message = verify_email(email)
+        message , profile_status = verify_email(email)
+        if(message=="Error"):
+            status="failed"
+        else:
+            status = "success"
+        resp = {"message" : message, "response": {
+            "profile_status": profile_status
+        }, "status": status}
 
-        return Response({"message": message})
+        return Response(resp)
 
 
 class CheckOTP(generics.ListCreateAPIView):
