@@ -74,13 +74,17 @@ class LoginAndSignUp(generics.ListCreateAPIView):
         if(user):
             user = User.objects.get(email=text)
             token = encode(headers={"userid": getattr(user, "id")})
-            details = {
-                "message": "Right",
-                "name": getattr(user, "name"),
-                "username": getattr(user, "username"),
-                "email": text,
-                "token": token
-            }
+            details = {"message": "Right",
+                       "body":
+                       {
+                           "name": getattr(user, "name"),
+                           "username": text,
+                           "email": getattr(user, "email"),
+                           "token": token},
+
+                       "message": "Right",
+                       "status": "Successful"
+                       }
             return Response(details)
 
             # Check If Username & Password is there.
@@ -88,15 +92,19 @@ class LoginAndSignUp(generics.ListCreateAPIView):
         if(user1):
             user = User.objects.get(username=text)
             token = encode({"userid": getattr(user, "id")})
-            details = {
-                "message": "Right",
-                "name": getattr(user, "name"),
-                "username": text,
-                "email": getattr(user, "email"),
-                "token": token
-            }
+            details = {"message": "Right",
+                       "body":
+                       {
+                           "name": getattr(user, "name"),
+                           "username": text,
+                           "email": getattr(user, "email"),
+                           "token": token},
+
+                       "message": "Right",
+                       "status": "Successful"
+                       }
             return Response(details)
-        return Response({"message": "Wrong"})
+        return Response({"message": "Wrong", "status": "Successful", "response": "Incorrect_Credentials"})
 
         # Check For Username
 
