@@ -110,7 +110,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
                        "status": "success"
                        }
             return Response(details)
-        return Response({"message": "Incorrect Credentials", "status": "success", "response": "Incorrect_Credentials"})
+        return Response({"message": user1, "status": "success", "response": "Incorrect_Credentials"})
 
         # Check For Username
 
