@@ -17,16 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "u384729105_Azea",
-        "HOST": "151.106.97.204",
-        "USER": "u384729105_Admin",
-        "PASSWORD": "Admin123",
-        "PORT": "3306"
-    }
-}
+
 
 # Host for sending e-mail.
 EMAIL_HOST = "smtp-relay.sendinblue.com"
@@ -100,9 +91,9 @@ WSGI_APPLICATION = 'AzeaApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-"""DATABASES = {'default': dj_database_url.parse(
+DATABASES = {'default': dj_database_url.parse(
     'postgres://qufu;zpjhabinxc:95127f5da60e96448d726a3c74cfb3176991e7bc061ea0f1ec620ccc048ac60b@ec2-54-170-163-224.eu-west-1.compute.amazonaws.com:5432/dfb5psv68pkbi')}
-"""
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -146,4 +137,4 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
