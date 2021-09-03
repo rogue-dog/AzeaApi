@@ -16,14 +16,13 @@ class checkEmailAndSendOTP(generics.ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         email = request.data.get("email")
-        message , profile_status = verify_email(email)
-        if(message=="Error"):
-            status="failed"
+        message, response = verify_email(email)
+        if(message == "Error"):
+            status = "failed"
         else:
             status = "success"
-        resp = {"message" : message, "response": {
-            "profile_status": profile_status
-        }, "status": status}
+        resp = {"message": message, "response":
+                response, "status": status}
 
         return Response(resp)
 
@@ -95,13 +94,12 @@ class LoginAndSignUp(generics.ListCreateAPIView):
         return Response({"message": "Wrong"})
 
 
-
 class checkUsername(generics.ListAPIView):
-    queryset= User.objects.all()
-    serializer_class=UserSerializer
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
     def get(self, request, *args, **kwargs):
         message = "Yes"
         if(User.objects.filter(username=request.data.get("username")).exists()):
-            message="No"
+            message = "No"
         return Response({"message": message})
