@@ -33,15 +33,15 @@ class CheckOTP(generics.ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
         try:
-            email = request.data.get("email")
-            otp = request.data.get("otp")
+            email = request.headers['email']
+            otp = request.headers['otp']
 
         except:
-            return Response(headers={"message": "Some Error", "status": "Successful"})
+            return Response({"message": "Some Error", "status": "Failed", "response": "bad_request"})
 
-        message = check_otp(email, otp)
+        message, verified = check_otp(email, otp)
 
-        return Response(headers={"message": message, "status": "Successful"})
+        return Response({"message": message, "status": "Successful", "response": verified})
 
 
 class LoginAndSignUp(generics.ListCreateAPIView):
@@ -68,8 +68,8 @@ class LoginAndSignUp(generics.ListCreateAPIView):
 
     def get(self, request, *args, **kwargs):
 
-        text = request.data.get("text")
-        password = request.data.get("password")
+        text = request.headers['text']
+        password = request.headers['password']
         user = User.objects.filter(email=text, password=password).exists()
         if(user):
             user = User.objects.get(email=text)
@@ -81,7 +81,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
                 "email": text,
                 "token": token
             }
-            return Response(headers=details)
+            return Response(details)
 
             # Check If Username & Password is there.
         user1 = User.objects.filter(username=text, password=password).exists()
@@ -95,8 +95,8 @@ class LoginAndSignUp(generics.ListCreateAPIView):
                 "email": getattr(user, "email"),
                 "token": token
             }
-            return Response(headers=details)
-        return Response(headers={"message": "Wrong"})
+            return Response(details)
+        return Response({"message": "Wrong"})
 
         # Check For Username
 
@@ -107,12 +107,13 @@ class checkUsername(generics.ListAPIView):
 
     def get(self, request, *args, **kwargs):
         message = "Available"
+        response = "Valid_Username"
         try:
             isexists = User.objects.filter(
-                username=request.data.get("username")).exists()
+                username=request.headers['username']).exists()
         except:
-            return Response(headers={"message": "Error While Fetching Data!", "status": "Failed"})
+            return Response({"message": "Error While Fetching Data!", "status": "Failed", "response": "Error_while_retrieving_the_data"})
 
         if(isexists):
             message = "Unavailable"
-        return Response(headers={"message": message, "status": "Successful"})
+        return Response({"message": message, "status": "Successful", "response": "Username Taken"})
