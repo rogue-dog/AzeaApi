@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('check/email', views.checkEmailAndSendOTP.as_view()),
     path('check/otp', views.CheckOTP.as_view()),
-    path('checkIn', views.LoginAndSignUp.as_view()),
+    path('create/acc', views.LoginAndSignUp.as_view()),
+    path('log/in', views.LoginAndSignUp.as_view()),
     path('check/username', views.checkUsername.as_view())
 ]

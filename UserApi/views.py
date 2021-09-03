@@ -44,9 +44,9 @@ class CheckOTP(generics.ListCreateAPIView):
         except:
             return Response({"message": "Some Error Occurred", "status": "failed", "response": "bad_request"})
 
-        message, verified = check_otp(email, otp)
+        message, verified, status = check_otp(email, otp)
 
-        return Response({"message": message, "status": "success", "response": verified})
+        return Response({"message": message, "status": status, "response": verified})
 
 
 class LoginAndSignUp(generics.ListCreateAPIView):
@@ -65,9 +65,9 @@ class LoginAndSignUp(generics.ListCreateAPIView):
             UserVerification.objects.filter(email=email).delete()
 
             token = encode({"userid": user.id})
-            return Response({"message": "Created", "token": token, "status": "success"})
+            return Response({"message": "Your Account has been Created", "token": token, "status": "success"})
         except:
-            return Response({"message": "Error", "status": "failed"})
+            return Response({"message": "Some Error Occurred", "status": "failed"})
 
             # LoginAPI
 
@@ -79,7 +79,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
         if(user):
             user = User.objects.get(email=text)
             token = encode(headers={"userid": getattr(user, "id")})
-            details = {"message": "Right",
+            details = {"message": "Logging In...",
                        "body":
                        {
                            "name": getattr(user, "name"),
@@ -97,19 +97,20 @@ class LoginAndSignUp(generics.ListCreateAPIView):
         if(user1):
             user = User.objects.get(username=text)
             token = encode({"userid": getattr(user, "id")})
-            details = {"message": "Right",
+            details = {"message": "Logging In...",
                        "body":
                        {
                            "name": getattr(user, "name"),
                            "username": text,
                            "email": getattr(user, "email"),
-                           "token": token},
+                           "token": token
+                       },
 
 
                        "status": "success"
                        }
             return Response(details)
-        return Response({"message": "Wrong", "status": "success", "response": "Incorrect_Credentials"})
+        return Response({"message": "Incorred Credentials", "status": "success", "response": "Incorrect_Credentials"})
 
         # Check For Username
 
