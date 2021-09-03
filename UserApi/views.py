@@ -78,7 +78,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
         user = User.objects.filter(email=text, password=password).exists()
         if(user):
             user = User.objects.get(email=text)
-            token = encode(headers={"userid": getattr(user, "id")})
+            token = encode({"userid": getattr(user, "id")})
             details = {"message": "Logging In...",
                        "body":
                        {
