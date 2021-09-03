@@ -15,8 +15,13 @@ class checkEmailAndSendOTP(generics.ListCreateAPIView):
     serializer_class = UserSerializer
 
     def get(self, request, *args, **kwargs):
-        email = request.headers['email']
-        message, response = verify_email(email)
+        try:
+            email = request.headers['email']
+            message, response = verify_email(email)
+        except:
+            message = "Error"
+            response = "bad_request"
+
         if(message == "Error"):
             status = "failed"
         else:
@@ -37,11 +42,11 @@ class CheckOTP(generics.ListCreateAPIView):
             otp = request.headers['otp']
 
         except:
-            return Response({"message": "Some Error", "status": "Failed", "response": "bad_request"})
+            return Response({"message": "Some Error Occurred", "status": "failed", "response": "bad_request"})
 
         message, verified = check_otp(email, otp)
 
-        return Response({"message": message, "status": "Successful", "response": verified})
+        return Response({"message": message, "status": "success", "response": verified})
 
 
 class LoginAndSignUp(generics.ListCreateAPIView):
@@ -60,9 +65,9 @@ class LoginAndSignUp(generics.ListCreateAPIView):
             UserVerification.objects.filter(email=email).delete()
 
             token = encode({"userid": user.id})
-            return Response({"message": "Created", "token": token})
+            return Response({"message": "Created", "token": token, "status": "success"})
         except:
-            return Response({"message": "Error"})
+            return Response({"message": "Error", "status": "failed"})
 
             # LoginAPI
 
@@ -82,8 +87,8 @@ class LoginAndSignUp(generics.ListCreateAPIView):
                            "email": getattr(user, "email"),
                            "token": token},
 
-                       "message": "Right",
-                       "status": "Successful"
+
+                       "status": "success"
                        }
             return Response(details)
 
@@ -100,11 +105,11 @@ class LoginAndSignUp(generics.ListCreateAPIView):
                            "email": getattr(user, "email"),
                            "token": token},
 
-                       "message": "Right",
-                       "status": "Successful"
+
+                       "status": "success"
                        }
             return Response(details)
-        return Response({"message": "Wrong", "status": "Successful", "response": "Incorrect_Credentials"})
+        return Response({"message": "Wrong", "status": "success", "response": "Incorrect_Credentials"})
 
         # Check For Username
 
@@ -120,9 +125,9 @@ class checkUsername(generics.ListAPIView):
             isexists = User.objects.filter(
                 username=request.headers['username']).exists()
         except:
-            return Response({"message": "Error While Fetching Data!", "status": "Failed", "response": "Error_while_retrieving_the_data"})
+            return Response({"message": "Error While Fetching Data!", "status": "failed", "response": "Error_while_retrieving_the_data"})
 
         if(isexists):
             message = "Unavailable"
             response = "Username_Taken"
-        return Response({"message": message, "status": "Successful", "response": response})
+        return Response({"message": message, "status": "success", "response": response})

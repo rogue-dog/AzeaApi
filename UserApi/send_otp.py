@@ -31,9 +31,10 @@ def verify_email(email):
 
 def check_otp(email, otp):
     try:
-        isexists =UserVerification.objects.filter(email=email, otp=otp).exists()
+        isexists = UserVerification.objects.filter(
+            email=email, otp=otp).exists()
     except:
-        return ("Error","Not Verified")
+        return ("Some Error Occurred", "Not Verified")
     if(isexists):
-        return ("Right","Email_Verified")
-    return ("Wrong","Incorrect_OTP")
+        return ("Your Email has been verified", "Email_Verified")
+    return ("Incorred OTP, please Enter the correct OTP", "Incorrect_OTP")
