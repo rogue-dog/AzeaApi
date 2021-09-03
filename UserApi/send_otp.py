@@ -9,7 +9,7 @@ def verify_email(email):
 
     if(v):
         if(User.objects.filter(email=email).exists()):
-            return ("Old", "existing user")
+            return ("Old", "existing_user")
         else:
             otp = str(random.randint(1000, 9999))
             message = "Your OTP for Email Verification is "+otp
@@ -22,7 +22,7 @@ def verify_email(email):
 
                 userV = UserVerification(email=email, otp=otp)
                 userV.save()
-                return ("New", "new user")
+                return ("New", "new_user")
 
             except:
                 return("Error", "Error")
