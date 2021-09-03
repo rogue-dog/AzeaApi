@@ -15,7 +15,7 @@ class checkEmailAndSendOTP(generics.ListCreateAPIView):
     serializer_class = UserSerializer
 
     def get(self, request, *args, **kwargs):
-        email = request.data.get("email")
+        email = request.headers['email']
         message, response = verify_email(email)
         if(message == "Error"):
             status = "failed"
@@ -24,7 +24,7 @@ class checkEmailAndSendOTP(generics.ListCreateAPIView):
         resp = {"message": message, "response":
                 response, "status": status}
 
-        return Response(headers=resp)
+        return Response(resp)
 
 
 class CheckOTP(generics.ListCreateAPIView):
