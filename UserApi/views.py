@@ -116,4 +116,5 @@ class checkUsername(generics.ListAPIView):
 
         if(isexists):
             message = "Unavailable"
-        return Response({"message": message, "status": "Successful", "response": "Username Taken"})
+            response = "Username_Taken"
+        return Response({"message": message, "status": "Successful", "response": response})
