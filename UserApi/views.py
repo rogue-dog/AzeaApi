@@ -150,10 +150,16 @@ class PostCreationAndRetrieve(generics.ListCreateAPIView):
     serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
-        data = request.data
-        id = decode_jwt.decode(data['token'])
-        file = data['file']
-        category = data['category']
-        post = Post(uploader_id=id, file=file, category=category)
-        post.save()
-        return Response({"message": "cul"})
+        try:
+            data = request.data
+            id, status = decode_jwt.decode(data['token'])
+            if(not status):
+                message, status, response = "Some Error Occurred", "failed", "Error"
+            file = data['file']
+            category = data['category']
+            post = Post(uploader_id=id, file=file, category=category)
+            post.save()
+            message, status, response = "Post Created SUccessfully", "success", "Post_Created"
+        except:
+            message, status, response = "Some Error Occurred", "failed", "Error"
+        return Response({"message": message, "status": status, "response": response})
