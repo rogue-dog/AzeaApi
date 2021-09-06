@@ -29,5 +29,5 @@ class Post(models.Model):
     category = models.CharField(max_length=10)
     likes = models.CharField(null=True, validators=[
                              validate_comma_separated_integer_list], default="", max_length=10000)
-    comments = models.JSONField(default='{ }')
+    comments = models.JSONField(default='{  }')
     timestamp = models.CharField(max_length=30)
