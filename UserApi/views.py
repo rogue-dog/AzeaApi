@@ -157,7 +157,9 @@ class PostCreationAndRetrieve(generics.ListCreateAPIView):
                 message, status, response = "Some Error Occurred", "failed", "Error"
             file = data['file']
             category = data['category']
-            post = Post(uploader_id=id, file=file, category=category)
+            time = data['timestamp']
+            post = Post(uploader_id=id, file=file,
+                        category=category, timestamp=time)
             post.save()
             message, status, response = "Post Created SUccessfully", "success", "Post_Created"
         except:
