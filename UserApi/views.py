@@ -145,8 +145,9 @@ class checkUsername(generics.ListAPIView):
 
 # UPLOAD A POST
 
-class Post(generics.ListCreateAPIView):
+class PostCreationAndRetrieve(generics.ListCreateAPIView):
     queryset = Post.objects.all()
+    serializer_class = UserSerializer
 
     def post(self, request, *args, **kwargs):
         data = request.data
