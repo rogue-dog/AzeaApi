@@ -1,4 +1,6 @@
+from typing_extensions import NotRequired
 from django.db import models
+from django.core.validators import validate_comma_separated_integer_list
 
 # Create your models here.
 
@@ -16,5 +18,15 @@ class User(models.Model):
 
 
 class UserVerification (models.Model):
+
     email = models.CharField(max_length=250, primary_key=True)
     otp = models.CharField(max_length=250)
+
+
+class Post(models.Model):
+    file = models.FileField()
+    uploader_id = models.CharField()
+    category = models.CharField(max_length=10)
+    likes = models.CharField(null=True, validators=[
+                             validate_comma_separated_integer_list], default="")
+    comments = models.JSONField(default='{}')

@@ -1,12 +1,14 @@
 import re
+from django.http.request import HttpRequest
 from rest_framework.response import Response
+from UserApi import models
 from UserApi.serializers import UserSerializer
-from UserApi.models import User, UserVerification
+from UserApi.models import User, UserVerification, Post
 from django.shortcuts import render
 from rest_framework import generics
 from .send_otp import check_otp, verify_email
 from .jwt_code import encode
-from UserApi import jwt_code
+from UserApi import jwt_code, decode_jwt
 # Create your views here.
 
 
@@ -72,10 +74,17 @@ class LoginAndSignUp(generics.ListCreateAPIView):
             # LoginAPI
 
     def get(self, request, *args, **kwargs):
+        try:
 
-        text = request.headers['text']
-        password = request.headers['password']
-        user = User.objects.filter(email=text, password=password).exists()
+            text = request.headers['text']
+            password = request.headers['password']
+            user = User.objects.filter(email=text, password=password).exists()
+            user1 = User.objects.filter(
+                username=text, password=password).exists()
+        except:
+            resp = {"status": "failed", "message": "Some Error Occurred ",
+                    "response": "Bad_Request"}
+            return Response(resp)
         if(user):
             user = User.objects.get(email=text)
             token = encode({"userid": getattr(user, "id")})
@@ -93,7 +102,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
             return Response(details)
 
             # Check If Username & Password is there.
-        user1 = User.objects.filter(username=text, password=password).exists()
+
         if(user1):
             user = User.objects.get(username=text)
             token = encode({"userid": getattr(user, "id")})
@@ -132,3 +141,18 @@ class checkUsername(generics.ListAPIView):
             message = "Unavailable"
             response = "Username_Taken"
         return Response({"message": message, "status": "success", "response": response})
+
+
+# UPLOAD A POST
+
+class Post(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+
+    def post(self, request: HttpRequest, *args, **kwargs):
+        data = request.POST
+        id = decode_jwt.decode(data['token'])
+        file = data['file']
+        category = data['category']
+        post = Post(uploader_id=id, file=file, category=category)
+        post.save()
+        return Response({"message": "cul"})
