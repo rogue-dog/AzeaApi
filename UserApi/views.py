@@ -148,8 +148,8 @@ class checkUsername(generics.ListAPIView):
 class Post(generics.ListCreateAPIView):
     queryset = Post.objects.all()
 
-    def post(self, request: HttpRequest, *args, **kwargs):
-        data = request.POST
+    def post(self, request, *args, **kwargs):
+        data = request.data
         id = decode_jwt.decode(data['token'])
         file = data['file']
         category = data['category']
