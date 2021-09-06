@@ -25,7 +25,7 @@ class UserVerification (models.Model):
 
 class Post(models.Model):
     file = models.FileField()
-    uploader_id = models.CharField()
+    uploader_id = models.CharField(max_length=100)
     category = models.CharField(max_length=10)
     likes = models.CharField(null=True, validators=[
                              validate_comma_separated_integer_list], default="")
