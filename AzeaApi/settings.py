@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'AzeaApi.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {'default': dj_database_url.parse(
-    'postgres://qufuzpjhabinxc:95127f5da60e96448d726a3c74cfb3176991e7bc061ea0f1ec620ccc048ac60b@ec2-54-170-163-224.eu-west-1.compute.amazonaws.com:5432/dfb5psv68pkbi')}
+    'postgres://eexvbvogdvsbdb:ecb5741a11ba1266c71002821f3c5cc69882b565bfa78e91b7e6a5b4bb422b70@ec2-52-19-164-214.eu-west-1.compute.amazonaws.com:5432/dcptc3ch8e0tsd')}
 
 
 # Password validation
