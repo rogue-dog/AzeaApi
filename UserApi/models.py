@@ -28,5 +28,5 @@ class Post(models.Model):
     uploader_id = models.CharField(max_length=100)
     category = models.CharField(max_length=10)
     likes = models.CharField(null=True, validators=[
-                             validate_comma_separated_integer_list], default="")
-    comments = models.JSONField(default='{}')
+                             validate_comma_separated_integer_list], default="", max_length=10000)
+    comments = models.JSONField(default='{ }')
