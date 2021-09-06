@@ -158,6 +158,7 @@ class PostCreationAndRetrieve(generics.ListCreateAPIView):
             file = data['file']
             category = data['category']
             time = data['timestamp']
+
             post = Post(uploader_id=id, file=file,
                         category=category, timestamp=time)
             post.save()
