@@ -91,9 +91,17 @@ WSGI_APPLICATION = 'AzeaApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {'default': dj_database_url.parse(
-    'mysql://u384729105_Admin:Admin123@sql452.main-hosting.eu:3306/u384729105_Azea')}
-
+# DATABASES = {'default': dj_database_url.parse(
+#  'mysql://u384729105_Admin:Admin123@sql452.main-hosting.eu:3306/u384729105_Azea')}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "u384729105_Azea",
+        "HOST": "sql452.main-hosting.eu",
+        "USER": "u384729105_Admin",
+        "PASSWORD": "Admin123",
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
