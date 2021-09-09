@@ -91,7 +91,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
             user = User.objects.get(email=text)
             token = encode({"userid": getattr(user, "id")})
             details = {"message": "Logging In...",
-                       "body":
+                       "response":
                        {
                            "name": getattr(user, "name"),
                            "username": text,
@@ -109,7 +109,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
             user = User.objects.get(username=text)
             token = encode({"userid": getattr(user, "id")})
             details = {"message": "Logging In...",
-                       "body":
+                       "response":
                        {
                            "name": getattr(user, "name"),
                            "username": text,
