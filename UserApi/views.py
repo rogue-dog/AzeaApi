@@ -9,6 +9,7 @@ from rest_framework import generics
 from .send_otp import check_otp, verify_email
 from .jwt_code import encode
 from UserApi import jwt_code, decode_jwt
+from django.db import close_old_connections
 # Create your views here.
 
 
@@ -162,6 +163,8 @@ class PostCreationAndRetrieve(generics.ListCreateAPIView):
         post = Post(uploader_id=id, file=file,
                     category=category, timestamp=time)
         post.save()
+
         message, status, response = "Post Created SUccessfully", "success", "Post_Created"
+        close_old_connections()
 
         return Response({"message": message, "status": status, "response": response})
