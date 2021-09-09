@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'AzeaApi.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 DATABASES = {'default': dj_database_url.parse(
-    'mysql://u384729105_Admin:Admin123@sql452.main-hosting.eu:3306/u384729105_Azea')}
+    'postgres://nychpige:6378Yjqdw1ZS1R37trdiSH0Wp6-hkTkP@satao.db.elephantsql.com/nychpige')}
 
 
 # Password validation
@@ -137,4 +137,3 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
