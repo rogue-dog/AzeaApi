@@ -80,6 +80,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
 
             text = request.headers['text']
             password = request.headers['password']
+            password = str(password)
             user = User.objects.filter(email=text, password=password).exists()
             user1 = User.objects.filter(
                 username=text, password=password).exists()
@@ -121,7 +122,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
                        "status": "success"
                        }
             return Response(details)
-        return Response({"message": "Incorrect Credentials", "status": "success", "response": "Incorrect_Credentials"})
+        return Response({"message": "Incorrect Credentials", "status": password, "response": "Incorrect_Credentials"})
 
         # Check For Username
 
