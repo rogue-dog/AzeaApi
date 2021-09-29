@@ -29,3 +29,11 @@ class Post(models.Model):
     category = models.CharField(max_length=10)
 
     timestamp = models.CharField(max_length=30)
+
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=1000)
+    email = models.CharField(max_length=1000)
+    contact =  models.CharField(max_length=10)
+    choice= models.CharField(max_length=100)

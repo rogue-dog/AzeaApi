@@ -24,5 +24,6 @@ urlpatterns = [
     path('create/acc', views.LoginAndSignUp.as_view()),
     path('log/in', views.LoginAndSignUp.as_view()),
     path('check/username', views.checkUsername.as_view()),
-    path('post/create', views.PostCreationAndRetrieve.as_view())
+    path('post/create', views.PostCreationAndRetrieve.as_view()),
+    path('contact', views.ContactUs.as_view())
 ]

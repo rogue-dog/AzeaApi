@@ -1,9 +1,10 @@
 import re
+from django.core import exceptions
 from django.http.request import HttpRequest
 from rest_framework.response import Response
 from UserApi import models
 from UserApi.serializers import UserSerializer
-from UserApi.models import User, UserVerification, Post
+from UserApi.models import Contact, User, UserVerification, Post
 from django.shortcuts import render
 from rest_framework import generics
 from .send_otp import check_otp, verify_email
@@ -80,7 +81,7 @@ class LoginAndSignUp(generics.ListCreateAPIView):
 
             text = request.headers['text']
             password = request.headers['password']
-            password= decode_jwt.decode(password)
+            password = decode_jwt.decode(password)
             user = User.objects.filter(email=text, password=password).exists()
             user1 = User.objects.filter(
                 username=text, password=password).exists()
@@ -170,3 +171,22 @@ class PostCreationAndRetrieve(generics.ListCreateAPIView):
         message, status, response = "Post Created SUccessfully", "success", "Post_Created"
 
         return Response({"message": message, "status": status, "response": response})
+
+
+class ContactUs(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+    queryset = Contact.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        email = request.data['email']
+        name = request.data['name']
+        contact = request.data['phone']
+        choice = request.data['choice']
+        client = Contact(name=name, email=email,
+                         contact=contact, choice=choice)
+        try:
+            client.save()
+            message = "Cool"
+        except:
+            message = "Error"
+        return Response({"message": message})
