@@ -18,6 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = ["*"]
 
 
 # Host for sending e-mail.
