@@ -3,6 +3,7 @@ This is a small backend project I developed for a client.
 It is an API, written in Django and deployed to Heroku.
 These APIs are developed in Django Rest Framework
 Endpoints Include -: 
+
 An Endpoint to send an OTP to an Email Address.
 An Endpoint to send an OTP to a Phone Number.
 An Endpoint to check whether the user entered the correct OTP or not.
