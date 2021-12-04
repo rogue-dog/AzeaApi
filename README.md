@@ -1,4 +1,9 @@
 # AzeaApi
+
+**Tech Stack -: Django Rest Framework, PostgreSQL Database.**
+
+
+
 This is a small backend project I developed for a client.
 It is an API, written in Django and deployed to Heroku.
 These APIs are developed in Django Rest Framework
